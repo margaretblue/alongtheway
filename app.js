@@ -5,7 +5,7 @@ var express = require('express'),
 app.configure(function () {
 
 });
-app.use(express.static(path.join(__dirname, 'app')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function (req, res) {
     res.sendfile('./app/views/index.html');
