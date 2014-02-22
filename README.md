@@ -1,1 +1,4 @@
-The greatest geolocation mobile app ever hell yeah SPACELAB FOREVER
+nodeboi
+=======
+
+A bare-bones node boilerplate

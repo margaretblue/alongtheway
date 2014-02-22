@@ -1,13 +1,6 @@
 module.exports = function (grunt) {
   grunt.initConfig({
-    simplemocha: {
-      options: {
-        timeout: 3000,
-        ignoreLeaks: false,
-        reporter: 'tap'
-      },
-      all: { src: ['test/**/*.js'] }
-    },
+    pkg: grunt.file.readJSON('package.json'),
     watch: {
       views: {
         files: ['app/views/**'],
@@ -16,14 +9,15 @@ module.exports = function (grunt) {
         }
       },
       scripts: {
-        files: ['public/js/**'],
+        files: ['app/scripts/**'],
+        tasks: ['uglify'],
         options: {
           livereload: true
         }
       },
-      sass: {
-        files: ['styles/**'],
-        tasks: ['sass'],
+      styles: {
+        files: ['app/styles/**'],
+        tasks: ['sass', 'cssmin'],
         options: {
           livereload: true
         }
@@ -33,18 +27,39 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: 'styles',
+          cwd: 'app/styles',
           src: ['*.scss'],
-          dest: './public/css',
+          dest: 'public/css',
           ext: '.css'
         }]
       }
+    },
+    uglify: {
+      my_target: {
+        files: [{
+          mangle: false,
+          expand: true,
+          cwd: 'app/scripts',
+          src: '**/*.js',
+          dest: 'public/js'
+        }]
+      }
+    },
+    cssmin: {
+      minify: {
+        expand: true,
+        cwd: 'public/css/',
+        src: ['*.css', '!*.min.css'],
+        dest: 'public/dist',
+        ext: '.min.css'
+      }
     }
   });
-  grunt.loadNpmTasks('grunt-simple-mocha');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.registerTask('default', ['watch', 'sass']);
-  grunt.registerTask('test', 'simplemocha');
+  grunt.registerTask('build', ['sass', 'concat', 'uglify']);
 };
