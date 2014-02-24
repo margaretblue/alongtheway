@@ -5,9 +5,11 @@ html
     link(rel='stylesheet' href='/public/css/index.css')
   body
     h1 Your Location
+    button#nearby
     #map-canvas
 
     script(src='//localhost:35729/livereload.js')
     script(src='http://code.jquery.com/jquery.min.js')
     script(src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true')
     script(src='/public/js/geolocate.js')
+    script(src='/public/js/nearbysearch.js')
