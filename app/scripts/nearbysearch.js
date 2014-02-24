@@ -3,7 +3,7 @@ var nearbyBtn = document.getElementById('nearby');
 var options = {
   location: {},
   radius: '500',
-  types: ['store']
+  types: ['restaurant']
 };
 
 function nearbySearch (clientLoc, options) {
