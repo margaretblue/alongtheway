@@ -24,5 +24,7 @@ function nearbyHandler (data) {
   var names = _(data).pluck('name').map(function (val) {
     return val;
   });
-  console.log(names);
+  for (var name in names) {
+    console.log(names[name]);
+  }
 }
