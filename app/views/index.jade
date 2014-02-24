@@ -1,7 +1,13 @@
+doctype
 html
   head
-    title nodeboi
+    title Your Location
+    link(rel='stylesheet' href='/public/css/index.css')
   body
-    h1 nodeboi
+    h1 Your Location
+    #map-canvas
 
     script(src='//localhost:35729/livereload.js')
+    script(src='http://code.jquery.com/jquery.min.js')
+    script(src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true')
+    script(src='/public/js/geolocate.js')
